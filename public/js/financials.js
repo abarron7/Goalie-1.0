@@ -14,7 +14,7 @@ module.exports = function(userid, callback) {
     console.log("cancelling callback function to run calcs");
   }
   // Query User database.  Return the first entry that matches the userID.
-  db.Users.findOne({
+  db.User.findOne({
     where: {
       id: userid
     }

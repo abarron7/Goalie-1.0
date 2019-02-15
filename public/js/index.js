@@ -1,87 +1,133 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
+var $username = $("#input-username");
+var $balance = $("#input-balance");
+var $income = $("#input-income");
+var $goaldescr = $("#input-goaldescr");
+var $goalamount = $("#input-goalamount");
+
 var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
+var $userList = $("#user-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  getUsers: function() {
+    return $.ajax({
+      url: "api/users",
+      type: "GET"
+    });
+  },
+  saveUser: function(users) {
+    console.log("\n\n Running API.saveUser function.\n");
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
+      url: "api/users",
+      data: JSON.stringify(users)
     });
   },
-  getExamples: function() {
+  getFinancials: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/financials/" + id,
       type: "GET"
     });
   },
-  deleteExample: function(id) {
+  saveFinancials: function(financials) {
+    console.log("\n\n Running API.saveFinancials function.\n");
     return $.ajax({
-      url: "api/examples/" + id,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      url: "..api/financials",
+      data: JSON.stringify(financials)
+    });
+  },
+  deleteFinancials: function(id) {
+    return $.ajax({
+      url: "../../api/financials/" + id,
       type: "DELETE"
     });
   }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
+// refreshUsers gets new financials from the db and repopulates the list
+// var refreshUsers = function() {
+//   API.getUser().then(function(data) {
+//     var $user = data.map(function(example) {
+//       var $a = $("<a>")
+//         .text(example.text)
+//         .attr("href", "/example/" + User.id);
 
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
+//       var $li = $("<li>")
+//         .attr({
+//           class: "list-group-item",
+//           "data-id": User.id
+//         })
+//         .append($a);
 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
+//       var $button = $("<button>")
+//         .addClass("btn btn-danger float-right delete")
+//         .text("ｘ");
 
-      $li.append($button);
+//       $li.append($button);
 
-      return $li;
-    });
+//       return $li;
+//     });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
-};
+//     $exampleList.empty();
+//     $exampleList.append($examples);
+//   });
+// };
 
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
+// handleFormSubmit is called whenever we submit a new financials
+// Save the new financials to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
 
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+  var users = {
+    username: $username.val().trim(),
+    goaldescr: $goaldescr.val().trim(),
+    goalamount: $goalamount.val().trim()
+  };
+  var financials = {
+    balance: $balance.val().trim(),
+    income: $income.val().trim(),
+    userid: 0
   };
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
+  if (!(users.username && financials.balance)) {
+    alert("You must enter your username and balance!");
     return;
   }
 
-  API.saveExample(example).then(function() {
-    refreshExamples();
+  var newID;
+  API.saveUser(users).then(function(x) {
+    newID = x.id;
+    console.log("new user ID is " + newID);
+
+    financials.userid = newID;
+    console.log(financials.userid);
+
+    API.saveFinancials(financials).then(function(x) {
+      console.log("Running API.saveFinancials(financials)");
+      console.log("new financial entry ID is " + x.id);
+    });
   });
 
-  $exampleText.val("");
-  $exampleDescription.val("");
-};
+  $username.val("");
+  $balance.val("");
+  $income.val("");
+  $goaldescr.val("");
+  $goalamount.val("");
 
+  alert("User Saved");
+  setTimeout(function() {
+    var goToProfileURL = "/users/" + newID;
+    window.location.href = goToProfileURL;
+  }, 1000);
+};
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
 var handleDeleteBtnClick = function() {
