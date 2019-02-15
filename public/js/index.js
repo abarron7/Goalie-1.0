@@ -5,7 +5,7 @@ var $income = $("#input-income");
 var $goaldescr = $("#input-goaldescr");
 var $goalamount = $("#input-goalamount");
 
-var $submitBtn = $("#submit");
+var $submitBtn = $("#submitf");
 var $userList = $("#user-list");
 
 // The API object contains methods for each kind of request we'll make
