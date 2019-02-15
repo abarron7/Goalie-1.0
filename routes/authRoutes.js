@@ -72,12 +72,13 @@ module.exports = (app, passport) => {
   });
   // adds the data from the newuser form to financials
   app.post("/dashboard", isLoggedIn, (req, res) => {
-    db.Goals.create(req.body).then(dataFromForm => {
+    db.Financials.create(req.body).then(dataFromForm => {
       res.render("dashboard", {
         balance: balance,
         income: income,
         description: decription,
-        cost: cost
+        cost: cost,
+        date: date
       });
     });
   });
