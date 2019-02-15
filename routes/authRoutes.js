@@ -11,7 +11,7 @@ module.exports = (app, passport) => {
     });
   });
 
-  // Sends sign up data through the passport authentication model which will redirect to the dashboard or to the signup route
+  // Sends sign up data through the passport authentication model which will redirect to the newuser or to the signup route
   app.post(
     "/signup",
     passport.authenticate("local-signup", {
@@ -58,6 +58,27 @@ module.exports = (app, passport) => {
     }
     res.render("dashboard", {
       logout: logout
+    });
+  });
+
+  app.get("/newuser", isLoggedIn, (req, res) => {
+    let logout = false;
+    if (req.user) {
+      logout = true;
+    }
+    res.render("newuser", {
+      logout: logout
+    });
+  });
+  // adds the data from the newuser form to financials
+  app.post("/dashboard", isLoggedIn, (req, res) => {
+    db.Goals.create(req.body).then(dataFromForm => {
+      res.render("dashboard", {
+        balance: balance,
+        income: income,
+        description: decription,
+        cost: cost
+      });
     });
   });
 

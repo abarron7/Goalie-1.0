@@ -31,5 +31,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     }
   });
+
+  User.associate = function(models) {
+    User.belongsTo(models.Goals, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+
   return User;
 };
