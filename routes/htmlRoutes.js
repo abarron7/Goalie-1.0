@@ -26,9 +26,16 @@ module.exports = app => {
       });
     });
   });
-  app.get("/newuser", function(req, res) {
-    db.Users.findAll({}).then(function(usersData) {
+  app.get("/newuser", (req, res) => {
+    db.User.findAll({}).then(function(usersData) {
+      let logout = false;
+      if (req.user) {
+        logout = true;
+      }
+      console.log(req.user);
       res.render("newuser", {
+        // PASSPORT: logout will be true or false if user is logged in
+        logout: logout,
         usersData: usersData
       });
     });
