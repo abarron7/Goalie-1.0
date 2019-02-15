@@ -1,25 +1,27 @@
 {{!-- PASSPORT: This is the signin form to sign in to the server --}}
-  <section class="hero is-success is-fullheight">
+<section class="hero is-success is-fullheight">
     <div class="hero-body">
-      <div class="container has-text-centered">
-        <div class="column is-4 is-offset-4">
-          <div class="box" id="box">
-            <figure class="avatar">
-              <img src="images/1659170386_4649aca8-2922-4ee9-a6d1-e10dca02ebf7.png">
-            </figure>
-            <form class="login">
-              <div class="field">
-                <input type="email" class="input is-large" id="email-input" placeholder="Email">
-              </div>
-              <div class="field">
-                <input name="password" type="password" class="input is-large" id="password-input" placeholder="Password">
-              </div>
-              <button type="submit" class="btn button is-block is-info is-large is-fullwidth">Login</button>
-            </form>
-          </div>
+        <div class="container has-text-centered">
+            <div class="column is-4 is-offset-4">
+                <div class="box" id="box">
+                    <figure class="avatar">
+                        <img src="images/1659170386_4649aca8-2922-4ee9-a6d1-e10dca02ebf7.png">
+                    </figure>
+                    <form id="signin" name="signin" method="post" action="signin">
+                        <div class="form-group">
+                            <label for="email">Email Address:</label>
+                            <input type="email" name="email" class="input is-large" placeholder="Email" style="background-color: #717d88;">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input name="password" type="password" class="input is-large" placeholder="Password" style="background-color: #717d88;">
+                        </div>
+                        <button class="btn button is-block is-info is-large is-fullwidth" type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/login.js"></script>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/login.js"></script>

@@ -1,22 +1,34 @@
 // PASSPORT: These are the main passport routes for handling signup, signin,logout, and to show the users dashboard
-module.exports = function(app, passport) {
+module.exports = (app, passport) => {
   // Load sign up page for authentication
-  app.get("/signup", function(req, res) {
-    res.render("signup");
+  app.get("/signup", (req, res) => {
+    let logout = false;
+    if (req.user) {
+      logout = true;
+    }
+    res.render("signup", {
+      logout: logout
+    });
   });
 
   // Sends sign up data through the passport authentication model which will redirect to the dashboard or to the signup route
   app.post(
     "/signup",
     passport.authenticate("local-signup", {
-      successRedirect: "/dashboard",
+      successRedirect: "/newuser",
       failureRedirect: "/signup"
     })
   );
 
   // Load sign in page for authentication
-  app.get("/signin", function(req, res) {
-    res.render("signin");
+  app.get("/signin", (req, res) => {
+    let logout = false;
+    if (req.user) {
+      logout = true;
+    }
+    res.render("signin", {
+      logout: logout
+    });
   });
 
   // Sends signin to passport the authentication method and redirects based on it's result
@@ -29,8 +41,8 @@ module.exports = function(app, passport) {
   );
 
   // Load logout route to destroy passport session
-  app.get("/logout", function(req, res) {
-    req.session.destroy(function(err) {
+  app.get("/logout", (req, res) => {
+    req.session.destroy(err => {
       if (err) {
         res.redirect("/error"); // will render a 404 since that route doesn't exist
       }
@@ -39,8 +51,14 @@ module.exports = function(app, passport) {
   });
 
   // Load dashboard page after authentication
-  app.get("/dashboard", isLoggedIn, function(req, res) {
-    res.render("dashboard");
+  app.get("/dashboard", isLoggedIn, (req, res) => {
+    let logout = false;
+    if (req.user) {
+      logout = true;
+    }
+    res.render("dashboard", {
+      logout: logout
+    });
   });
 
   // Passport function that checks if the user is logged in or not.  If not then it redirects them to the signin page

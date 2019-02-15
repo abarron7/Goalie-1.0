@@ -19,6 +19,13 @@ module.exports = app => {
     });
   });
 
+  app.get("/dasboard", function(req, res) {
+    db.Users.findAll({}).then(function(usersData) {
+      res.render("newuser", {
+        usersData: usersData
+      });
+    });
+  });
   app.get("/newuser", function(req, res) {
     db.Users.findAll({}).then(function(usersData) {
       res.render("newuser", {
