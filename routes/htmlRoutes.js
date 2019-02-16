@@ -21,8 +21,13 @@ module.exports = app => {
 
   app.get("/dashboard", function(req, res) {
     db.Users.findAll({}).then(function(usersData) {
+      let logout = false;
+      if (req.user) {
+        logout = true;
+      }
       res.render("newuser", {
-        usersData: usersData
+        usersData: usersData,
+        logout: logout
       });
     });
   });

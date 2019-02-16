@@ -78,8 +78,7 @@ module.exports = (app, passport) => {
         balance: balance,
         income: income,
         goaldescr: goaldescr,
-        cost: cost,
-        date: date
+        goalamount: goalamount
       });
     });
   });

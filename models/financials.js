@@ -9,9 +9,9 @@ module.exports = function(sequelize, DataTypes) {
     goaldescr: DataTypes.STRING,
     balance: DataTypes.FLOAT,
     income: DataTypes.FLOAT,
-    cost: DataTypes.FLOAT,
     date: DataTypes.DATE,
-    goaldate: DataTypes.STRING
+    goaldate: DataTypes.STRING,
+    goalamount: DataTypes.FLOAT
   });
 
   Financials.associate = function(models) {
