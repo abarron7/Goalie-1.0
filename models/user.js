@@ -32,13 +32,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  User.associate = function(models) {
-    User.belongsTo(models.Financials, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
-
   return User;
 };

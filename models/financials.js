@@ -8,5 +8,14 @@ module.exports = function(sequelize, DataTypes) {
     date: DataTypes.DATE,
     goaldate: DataTypes.STRING
   });
+
+  Financials.associate = function(models) {
+    Financials.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+
   return Financials;
 };
