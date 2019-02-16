@@ -74,6 +74,7 @@ module.exports = (app, passport) => {
   app.post("/dashboard", isLoggedIn, (req, res) => {
     db.Financials.create(req.body).then(dataFromForm => {
       res.render("dashboard", {
+        form: dataFromForm,
         balance: balance,
         income: income,
         description: decription,

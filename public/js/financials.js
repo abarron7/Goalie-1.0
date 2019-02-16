@@ -9,9 +9,8 @@ var moment = require("moment");
 module.exports = function(userid, callback) {
   console.log("running callback function to run calcs");
   if (userid === "POST") {
-    return console.log("userid is " + userid + ", error");
-
     console.log("cancelling callback function to run calcs");
+    return console.log("userid is " + userid + ", error");
   }
   // Query User database.  Return the first entry that matches the userID.
   db.User.findOne({
@@ -91,6 +90,7 @@ module.exports = function(userid, callback) {
       console.log(userFinancials);
       console.log("finished callback function to run calcs");
       callback(userDetails);
+      callback(timeDifference);
     });
   });
 };
