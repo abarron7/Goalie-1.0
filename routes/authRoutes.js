@@ -77,7 +77,7 @@ module.exports = (app, passport) => {
         form: dataFromForm,
         balance: balance,
         income: income,
-        description: decription,
+        goaldescr: goaldescr,
         cost: cost,
         date: date
       });

@@ -29,7 +29,7 @@ var API = {
   },
   getFinancials: function() {
     return $.ajax({
-      url: "api/financials/" + id,
+      url: "api/Financials/" + id,
       type: "GET"
     });
   },
@@ -40,13 +40,13 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "..api/financials",
+      url: "..api/Financials",
       data: JSON.stringify(financials)
     });
   },
   deleteFinancials: function(id) {
     return $.ajax({
-      url: "../../api/financials/" + id,
+      url: "../../api/Financials/" + id,
       type: "DELETE"
     });
   }
@@ -87,7 +87,6 @@ var handleFormSubmit = function(event) {
   event.preventDefault();
 
   var users = {
-    username: $username.val().trim(),
     goaldescr: $goaldescr.val().trim(),
     goalamount: $goalamount.val().trim()
   };

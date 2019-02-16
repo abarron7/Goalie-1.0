@@ -19,7 +19,7 @@ module.exports = app => {
     });
   });
 
-  app.get("/dasboard", function(req, res) {
+  app.get("/dashboard", function(req, res) {
     db.Users.findAll({}).then(function(usersData) {
       res.render("newuser", {
         usersData: usersData
@@ -41,15 +41,15 @@ module.exports = app => {
     });
   });
 
-  // Load example page and pass in an example by id
-  app.get("/users/:id", function(req, res) {
-    console.log("~~Running get user request~~");
-    // if (req.params.id != "POST") {
-    console.log("~~Running get user request~~");
-    financialsData(req.params.id, function(userDetails) {
-      res.render("financials", userDetails);
-    });
-  });
+  // // Load example page and pass in an example by id
+  // app.get("/users/:id", function(req, res) {
+  //   console.log("~~Running get user request~~");
+  //   // if (req.params.id != "POST") {
+  //   console.log("~~Running get user request~~");
+  //   financialsData(req.params.id, function(userDetails) {
+  //     res.render("financials", userDetails);
+  //   });
+  // });
   // Render 404 page for any unmatched routes
   app.get("*", (req, res) => {
     res.render("404");
