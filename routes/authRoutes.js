@@ -1,5 +1,21 @@
 // PASSPORT: These are the main passport routes for handling signup, signin,logout, and to show the users dashboard
 module.exports = (app, passport) => {
+  app.get("/", (req, res) => {
+    db.User.findAll({}).then(function(usersData) {
+      let logout = false;
+      if (req.user) {
+        logout = true;
+      }
+      console.log(req.user);
+      res.render("index", {
+        msg: "Welcome!",
+        // PASSPORT: logout will be true or false if user is logged in
+        logout: logout,
+        usersData: usersData
+      });
+    });
+  });
+
   // Load sign up page for authentication
   app.get("/signup", (req, res) => {
     let logout = false;
