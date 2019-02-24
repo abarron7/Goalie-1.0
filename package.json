@@ -1,7 +1,7 @@
 {
-  "name": "node-handlebars-boilerplate",
+  "name": "goalie-1.0",
   "version": "1.0.0",
-  "description": "Project 2 Starter",
+  "description": "financial-management",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
