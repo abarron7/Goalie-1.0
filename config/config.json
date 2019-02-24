@@ -3,7 +3,7 @@
     "username": "root",
     "password": "root",
     "port": 8889,
-    "database": "financialsdb",
+    "database": "finandb",
     "host": "localhost",
     "dialect": "mysql"
   },

@@ -6,12 +6,12 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
       allowNull: false
     },
-    goaldescr: DataTypes.STRING,
     balance: DataTypes.FLOAT,
     income: DataTypes.FLOAT,
+    goaldescr: DataTypes.STRING,
+    goalamount: DataTypes.FLOAT,
     date: DataTypes.DATE,
-    goaldate: DataTypes.STRING,
-    goalamount: DataTypes.FLOAT
+    goaldate: DataTypes.STRING
   });
 
   Financials.associate = function(models) {

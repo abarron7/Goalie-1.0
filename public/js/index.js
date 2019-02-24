@@ -33,13 +33,13 @@ var API = {
     });
   },
   saveFinancials: function(financials) {
-    console.log("\n\n Running API.saveFinancials function.\n");
+    console.log("\n Running API.saveFinancials function.\n");
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "..api/Financials",
+      url: "../../api/Financials",
       data: JSON.stringify(financials)
     });
   },
